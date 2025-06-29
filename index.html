@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Music Player</title>
+  <style>
+    body {
+      background-color: #d3d1cc;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .player {
+      background-color: #e8e6e1;
+      border-radius: 20px;
+      box-shadow: 5px 5px 10px #aaa;
+      width: 320px;
+      padding: 20px;
+    }
+
+    .cover img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .info {
+      text-align: left;
+      margin-top: 15px;
+      padding-left: 5px;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .artist {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .range {
+      width: 100%;
+      margin: 15px 0;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: black;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 20px;
+    }
+
+    .controls button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .controls button span {
+      font-size: 28px;
+     }
+
+
+    .controls button:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+
+<div class="player">
+  <div class="cover">
+    <img src="wannabe yours.jpg" alt="cover"/>
+  </div>
+
+  <div class="info">
+    <div class="title">I Wanna Be Yours</div>
+    <div class="artist">Arctic Monkeys</div>
+  </div>
+
+  <div class="range">
+    <input type="range" id="progressBar" value="0" min="0" max="100" />
+  </div>
+
+  <div class="controls">
+    <button onclick="shuffle()"><span>🔀</span></button>
+    <button onclick="prev()"><span>⏮</span></button>
+    <button onclick="playAudio()"><span>▶️</span></button>
+    <button onclick="pauseAudio()"><span>⏸️</span></button>
+    <button onclick="next()"><span>⏭</span></button>
+    <button onclick="repeat()"><span>🔁</span></button>
+  </div>
+
+  <audio id="audio">
+    <source src="ReelAudio-84740.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<script>
+  const audio = document.getElementById("audio");
+  const progressBar = document.getElementById("progressBar");
+
+  function playAudio() {
+    audio.play();
+  }
+
+  function pauseAudio() {
+    audio.pause();
+  }
+
+  // Update progress bar as audio plays
+  audio.addEventListener("timeupdate", () => {
+    const progress = (audio.currentTime / audio.duration) * 100;
+    progressBar.value = progress || 0;
+  });
+
+  // Seek song when range bar is moved
+  progressBar.addEventListener("input", () => {
+    audio.currentTime = (progressBar.value / 100) * audio.duration;
+  });
+
+  // Placeholder functions
+  function shuffle() {
+    alert("Shuffle clicked (add real functionality)");
+  }
+
+  function prev() {
+    alert("Previous clicked");
+  }
+
+  function next() {
+    alert("Next clicked");
+  }
+
+  function repeat() {
+    alert("Repeat clicked");
+  }
+</script>
+
+</body>
+</html>
+
